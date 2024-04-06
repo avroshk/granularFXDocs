@@ -1,0 +1,237 @@
+<!doctype html>
+<html>
+    <head>
+                <title>Controls - Granular FX</title>
+
+            <meta charset="utf-8">
+            <meta http-equiv="X-UA-Compatible" content="IE=edge">
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+            
+            
+            
+
+            
+                <link  rel="icon" type="image/x-icon" href="../assets/img/favicon.ico">
+            
+                    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/highlight.min.js"></script>
+                        <script>hljs.initHighlightingOnLoad();</script>
+            <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Fira+Mono:400,700">
+            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+            <link rel="stylesheet" href="../assets/css/bootstrap.min.css">
+            <link rel="stylesheet" href="../assets/css/main.min.css">
+                <script src="../search/main.js"></script>
+
+            
+                
+                    <style>
+                        :root {
+                            --text: white;
+                            --title: white;
+                            --primary: white;
+                            --background: black;
+                        }
+                    </style>
+                
+            
+    </head>
+
+    <body>
+        <div class="container py-3">
+            <header>
+                    <!-- block header -->
+<nav class="navbar navbar-expand-xl border-bottom">
+    <div class="container-fluid">
+        
+
+        
+            <span class=" fs-4 title-color site-name" id="component-site-name" style="text-transform: uppercase;">Granular FX</span>
+        
+
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarsMenu"
+            aria-controls="navbarsMenu" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse flex-column ml-auto" id="navbarsMenu">
+            <ul class="navbar-nav">
+
+                <!-- block menu -->
+                <li class="nav-item">
+                    <!-- block menu -->
+    
+        <li class="nav-item" id="component-menu">
+            <ul class="navbar-nav">
+                        <li class="nav-item">
+                            <a class="
+                            nav-link text-gray text-decoration-none" href="..">[Introduction]</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class=" active 
+                            nav-link text-gray text-decoration-none" href="./">[Controls]</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="
+                            nav-link text-gray text-decoration-none" href="../layout/">[Layout]</a>
+                        </li>
+            </ul>
+        </li>
+<!-- endblock -->
+                </li>
+                <!-- endblock -->
+
+                <!-- block search -->
+                <li class="nav-item">
+                    <a class="collapsed" data-bs-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
+                        <div class="md-search-icon">
+                            <i class="fa fa-search" aria-hidden="true"></i>
+                        </div>
+                    </a>
+                </li>
+                <!--  endblock -->
+
+                <!-- block source -->
+                <li class="nav-item">
+                    
+                </li>
+                <!--  endblock -->
+            </ul>
+        </div>
+    </div>
+</nav>
+<!--  endblock -->
+            </header>
+
+            <main><!-- block search -->
+<div class="collapse" id="collapseExample">
+    <div role="search" class="search-box">
+        <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+            <input type="text" name="q" class="search-query"
+            placeholder="Search docs" title="Type search term here" />
+        </form>
+    </div>
+</div>
+<!-- endblock -->
+                    <!-- block content -->
+<section class="container post">
+    <article>
+        <header>
+            
+                <h1 class=" title" id="component-title">Controls</h1>
+            
+        </header>
+        <p><h2 id="controls">Controls</h2>
+<h3 id="main">Main</h3>
+<ul>
+<li><code>Gain</code> - Main input gain.</li>
+<li><code>Mix</code> - Mix your dry input signal to the wet signal produced by the plugin. 0.0 is 100% dry, 1.0 is 100% wet.</li>
+<li><code>Live Track View Size</code> - Size of the waveform displayed under Live Input. This ranges from 4bars to a quarter note. I might take this control out later, but it seems good to have it while we experiment with the UI</li>
+<li><code>Capture Mode</code> - Switch between capture modes FREE | SYNC | ONSET. More details in the <a href="#capture-modes">Capture Modes</a> section.</li>
+<li><code>Onset Detection Mode</code> - Switch between modes PERCUSSION | VOCALS. "Percussion" mode is better for detecting very sharp attacks,  while "vocals" mode tends to catch slow pitch changes and transitions between words. </li>
+<li><code>Onset Threshold</code> - Once an onset has been detected, it has a strength between 0.0 and 1.0. Increase the "Onset Threshold" to filter out the weaker onsets.</li>
+<li><code>Sync Quantization</code> - "Sync Quantization" only makes sense when the SYNC Capture Mode is selected. It sets the interval of quantization for capture. Let's say, when it is set to '1/4', even if you hit capture a random point in time, the capture will start at a quarter note boundary (1.1 | 1.2 | 1.3 | 1.4 and so on). Similarly, if it is set to '1 bar', capture will start at 1 bar boundary (1.1 | 2.1 | 3.1 and so on).</li>
+</ul>
+<h3 id="capture">Capture</h3>
+<ul>
+<li><code>Capture</code> - Button to trigger capture. Sometimes, clicking Capture will arm the Capture button (indicated by a green boundary around the button) but the capture will begin when let's say the next onset is detected. </li>
+<li><code>Auto Capture Interval</code> - Auto Capture is turned off by default. Setting this interval to a value will automatically retrigger capture at the specified interval. "Capture mode" supercedes auto capture interval. Let's say, the capture mode is set to ONSET, and auto capture interval is <code>1/2</code>. Even after 1/2 bar has played through the Live Input, auto capture setting will arm the capture at that interval and wait for an onset to arrive.</li>
+</ul>
+<blockquote>
+<p><strong>Note:</strong> You must click "Capture" button first to start capture. Then on, if "Auto Capture Interval" is set it will take care of re-triggering capture as per the set mode and sync quantization setttings.</p>
+</blockquote>
+<ul>
+<li><code>Capture Size</code> - Set the size of the buffer to capture.</li>
+</ul>
+<h3 id="grain">Grain</h3>
+<ul>
+<li><code>Grain Size</code> - Size of the grain. This region of audio is what is sequenced and triggered by the Sequencer.</li>
+<li><code>Gain</code> - Adjust grain specific gain.</li>
+<li><code>Start Position</code> - Adjust start position of the grain. 0.0 to 1.0 covers the region from the beginning of the buffer till the end.</li>
+</ul>
+<blockquote>
+<p><strong>Note:</strong> You can click anywhere in the captured waveform to move the start position. Even better, you can click on the little ▾ above the waveform to move the start position to where onset was detected.</p>
+</blockquote>
+<ul>
+<li><code>End Position</code> - Adjust the end position of the grain. It's range is [-1.0 | 0.0 | 1.0]. When set to 0.0, the end position is set as per the size of the grain, let's 1/16 of a note. Adjust the end-position between -1.0 and 0.0 to reduce the size and similarly, adjust the end-position between 0.0 and 1.0 to increase the size of the grain.</li>
+</ul>
+<blockquote>
+<p><strong>Note:</strong> You can CMD + click on the waveform to select the end position.</p>
+</blockquote>
+<ul>
+<li><code>Attack/Release Samples</code> - This applies a smoothing ramp at the beginning and the end of the grain. Currently, the values ranges from 0 to 500 samples of audio (which is pretty stringent - 0 to 11.3 milliseconds @ 44.1kHz). It's there to simply smoothen the edges to avoid clicks. I plan to replace this with a full blown ADSR envelope so we can control attack, decay, sustain release for the grain. Maybe even a custom envelope that you can draw but that sounds like an overkill at the moment.</li>
+<li><code>Pan</code> - Pan. Mono tracks should produce stereo signal if the DAW allows you to get stereo signal from a mono track (? is that even possible)</li>
+<li><code>Reverse</code> - Reverse the playback of the grain. Lookout of the grain playback indicators.</li>
+<li><code>Grain Window Lock</code> - (<strong>This is still experimental</strong>). When "Auto Capture Interval" is set to a value equal or smaller than the "Capture Size" itself, the capture never stops - which is kind of cool. Let's call this the <code>tape mode</code>. The capture window now resembles a tape and the grain window resembles a playhead. Usually, the grain window moves with the tape when capture is in progress. The "Grain Window Lock" allows you to lock it in place. I am yet to experiment with this more but I have a feeling there is some potential to do something cool with this.</li>
+<li><code>Grain Jump Interval</code> - (<strong>This is still experimental</strong>). In the <code>tap mode</code> (as discussed in Grain Window Lock control), when the grain window is moving with the tape and goes out of view it automatically tries to jump ahead and find a new onset. "Grain Jump Interval" sets the interval after which we want the jump to take place. The functionality of this control isn't yey fully sketched out in my head. I might take it out later if it doesn't make sense.</li>
+</ul>
+<h2 id="sequencer">Sequencer</h2>
+<ul>
+<li><code>Mute</code> - Mute the lane associated to one of the the 4 grains above.</li>
+<li><code>Sequencer Steps</code> - Change the number of steps and maybe create some polyrhythm. It seems like there is an underlying bug which prevents the step from circling back. Should be fixed in the next release.</li>
+<li><code>Sequencer Speed</code> - Change the speed of the sequencer steps. </li>
+<li><code>Randomize</code> - Randomly turn on or turn off steps in the lane.</li>
+</ul>
+<h2 id="capture-modes">Capture Modes</h2>
+<p>Capture Modes are intertesting to play with and deserve a deeper dive.</p>
+<ul>
+<li><code>FREE</code> - This the FREE mode a.k.a manual capture model. When set, capture starts exactly at the point when "Capture" button is clicked. If "Auto Caputure Interval" is set the re-trigger happens at intervals from when you first clicked Capture button.</li>
+<li><code>SYNC</code> - In this mode, once you click the "Capture" button, the plugin waits till the next quantized time before actually starting the capture. This is similar to the Sync Quantization settings that some DAWs have to start playback. The "Sync Quantization" control in the Main section allows you to set the quantization anywhere between 1/8 of a note to 4 bars. For example, Sync Quantization is set to 1/4 and you click the Capture button somehwhere between 3.4 and 3.4, the capture will wait till your DAW's playhead reaches 3.4 (the next quarter note).</li>
+<li><code>ONSET</code> - Clicking the capture button arms the Capture but waits for the next "Onset" before starting the capture. You can adjust the "Onset Threshold" to filter out or include weaker onsets. Check "Onset Dection Mode" in the Main section for more details about the onset detector. The onset detector is still a work in progress and can be better.</li>
+</ul>
+<blockquote>
+<p><strong>Note:</strong> In this mode, once the capture is triggered the grain window automatically <em>jumps</em> to the first onset. </p>
+</blockquote></p>
+    </article>
+</section>
+<!-- endblock -->
+            </main>
+
+            
+                    <!-- block preview -->
+        <div class="row row-cols-md-3 text-center pt-md-3" id="component-preview">
+            <div class="col themed-grid-col">
+                <a rel="prev" href=".." class="nav-link">
+                    <i class="fa fa-arrow-left"></i> Previous
+                </a>
+            </div>
+            <div class="col themed-grid-col"></div>
+            <div class="col themed-grid-col">
+                <a rel="next" href="../layout/" class="nav-link">
+                    Next <i class="fa fa-arrow-right"></i>
+                </a>
+            </div>
+        </div>
+<!-- endblock -->
+            
+
+            
+                    <!-- block footer -->
+<footer class="pt-4 my-md-5 pt-md-5 border-top" id="component-footer">
+    <div class="row">
+        <div class="col-12 col-md">
+                <!-- block copyright -->
+
+    <small class="d-block mb-3">
+        Made with
+        <a href="https://github.com/FernandoCelmer/mkdocs-simple-blog" target="_blank" rel="noopener">
+            Simple Blog for MkDocs
+        </a>
+    </small>
+
+<!-- endblock -->
+        </div>
+    </div>
+</footer>
+<!-- endblock -->
+            
+        </div>
+
+            <script>var base_url = '..';</script>
+            <script src="../assets/js/jquery-3.3.1.slim.min.js""></script>
+            <script src="../assets/js/bootstrap.bundle.min.js""></script>
+            <script src="../assets/js/main.min.js""></script>
+                <script src="../search/main.js" defer></script>
+
+    </body>
+
+</html>
